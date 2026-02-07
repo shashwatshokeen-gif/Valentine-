@@ -1,155 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>For Neelanshi 💖</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #ff6a88, #ff99ac);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <title>Hey Nikki 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        .card {
-            background: rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(12px);
-            padding: 32px;
-            border-radius: 22px;
-            text-align: center;
-            width: 90%;
-            max-width: 430px;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-        }
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
 
-        h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
 
-        h2 {
-            font-size: 22px;
-            margin: 18px 0;
-        }
+    h1 {
+      color: #ff4d6d;
+    }
 
-        p {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 24px;
-        }
+    p {
+      font-size: 18px;
+    }
 
-        .buttons {
-            position: relative;
-            height: 130px;
-        }
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
 
-        button {
-            border: none;
-            padding: 13px 28px;
-            font-size: 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+    }
 
-        #yes {
-            background: #fff;
-            color: #ff4d6d;
-            font-weight: 600;
-        }
+    #noBtn {
+      background: #ccc;
+      position: absolute;
+    }
 
-        #no {
-            background: transparent;
-            color: #fff;
-            border: 2px solid #fff;
-            position: absolute;
-            left: 140px;
-            top: 60px;
-        }
-
-        #yes:hover {
-            transform: scale(1.12);
-        }
-
-        .celebrate {
-            display: none;
-            font-size: 20px;
-            margin-top: 22px;
-            line-height: 1.4;
-        }
-
-        .signature {
-            margin-top: 15px;
-            font-size: 14px;
-            opacity: 0.85;
-        }
-    </style>
+    #maybeBtn {
+      background: #ffd166;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="card">
-    <h1>Hey Neelanshi 💕</h1>
-
-    <p>
-        I could’ve asked you normally…  
-        but I decided to be a little extra 😌  
-        so I made this instead.
+  <div class="card" id="card">
+    <h1>Hey Nikki 💕</h1>
+    <p id="text">
+      Motuuuu 😌  
+      Will you be my Valentine? 💌  
+      <br><br>
+      — Yours truly, Shashwat 😎
     </p>
 
-    <h2>Will you be my Valentine? 💌</h2>
+    <button id="yesBtn" onclick="yesClicked()">YES 💖</button>
+    <button id="maybeBtn" onclick="maybeClicked()">Maybe 🤔</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 😝</button>
+  </div>
 
-    <div class="buttons">
-        <button id="yes">Yes 💖</button>
-        <button id="no">No 😅</button>
-    </div>
+  <script>
+    const questions = [
+      "Are you REALLY sure, Nikki? 🥺",
+      "Like 100% pakka? 😌",
+      "Motuu, last chance to say no 😏",
+      "Okay final final… YES? 💍💖"
+    ];
 
-    <div class="celebrate" id="celebrate">
-        YAYYY!! 🎉💘  
-        Best decision of the day 😄  
-        <br><br>
-        Step 1 complete.  
-        Step 2: coffee with me? ☕😉
-        <div class="signature">— Shashwat 💫</div>
-    </div>
-</div>
+    let step = 0;
 
-<script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const celebrate = document.getElementById("celebrate");
-
-    let yesClicks = 0;
-
-yesBtn.addEventListener("click", () => {
-    yesClicks++;
-
-    if (yesClicks === 1) {
-        yesBtn.innerText = "Are you sure? 😏";
-    } 
-    else if (yesClicks === 2) {
-        yesBtn.innerText = "Like… REALLY sure? 🥺";
-    } 
-    else if (yesClicks === 3) {
-        yesBtn.innerText = "Nikki… think once more 😌";
-    }
-    else if (yesClicks === 4) {
-        yesBtn.innerText = "Moti last chance h 💖";
-    }
-    else {
-        celebrate.style.display = "block";
-        yesBtn.style.display = "none";
-        noBtn.style.display = "none";
+    function yesClicked() {
+      if (step < questions.length) {
+        document.getElementById("text").innerHTML = questions[step];
+        step++;
+      } else {
+        document.getElementById("card").innerHTML = `
+          <h1>YAYYYYY 🎉💖</h1>
+          <p>
+            Officially my Valentine now 😍<br><br>
+            I owe you chocolates, hugs & infinite love 🍫🤗
+            <br><br>
+            — Shashwat 💘
+          </p>
+        `;
+      }
     }
 
-    yesBtn.style.transform = `scale(${1 + yesClicks * 0.05})`;
-});
-</script>
+    function maybeClicked() {
+      document.getElementById("text").innerHTML =
+        "Maybe means YES but with drama 😏💖";
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+  </script>
 
 </body>
 </html>
