@@ -124,17 +124,31 @@
     const yesBtn = document.getElementById("yes");
     const celebrate = document.getElementById("celebrate");
 
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * 260 - 130;
-        const y = Math.random() * 120 - 60;
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    let yesClicks = 0;
 
-    yesBtn.addEventListener("click", () => {
+yesBtn.addEventListener("click", () => {
+    yesClicks++;
+
+    if (yesClicks === 1) {
+        yesBtn.innerText = "Are you sure? 😏";
+    } 
+    else if (yesClicks === 2) {
+        yesBtn.innerText = "Like… REALLY sure? 🥺";
+    } 
+    else if (yesClicks === 3) {
+        yesBtn.innerText = "Nikki… think once more 😌";
+    }
+    else if (yesClicks === 4) {
+        yesBtn.innerText = "Moti last chance h 💖";
+    }
+    else {
         celebrate.style.display = "block";
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
-    });
+    }
+
+    yesBtn.style.transform = `scale(${1 + yesClicks * 0.05})`;
+});
 </script>
 
 </body>
